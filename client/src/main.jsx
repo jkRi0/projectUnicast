@@ -7,7 +7,15 @@ import App from './App.jsx';
 import './styles/global.css';
 import { AuthProvider } from './context/AuthContext.jsx';
 
-registerSW({ immediate: true });
+const updateSW = registerSW({
+  immediate: true,
+  onRegistered(registration) {
+    console.log('Service Worker registered:', registration);
+  },
+  onRegisterError(error) {
+    console.error('Service Worker registration error:', error);
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

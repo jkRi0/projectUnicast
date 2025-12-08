@@ -7,6 +7,10 @@ import MongoStore from 'connect-mongo';
 
 import authRoutes from './routes/authRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
+import eventRoutes from './routes/eventRoutes.js';
+import rsvpRoutes from './routes/rsvpRoutes.js';
+import feedbackRoutes from './routes/feedbackRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 import { attachUser } from './middleware/auth.js';
 
 const app = express();
@@ -89,6 +93,10 @@ app.get('/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api/events', rsvpRoutes);
+app.use('/api/events', feedbackRoutes);
+app.use('/api/events', messageRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });

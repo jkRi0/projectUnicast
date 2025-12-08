@@ -9,11 +9,11 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Sports Task Coach',
-        short_name: 'TaskCoach',
-        description: 'Sports-themed real-time task manager PWA',
-        theme_color: '#0B3D91',
-        background_color: '#FFFFFF',
+        name: 'UniEvent - Personalized Event Planning',
+        short_name: 'UniEvent',
+        description: 'Personalized event management with one-on-one invitations via email or SMS',
+        theme_color: '#1e3a8a',
+        background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
         scope: '/',
@@ -23,11 +23,13 @@ export default defineConfig(({ mode }) => ({
             src: 'icons/icon-192.svg',
             sizes: '192x192',
             type: 'image/svg+xml',
+            purpose: 'any',
           },
           {
             src: 'icons/icon-512.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
+            purpose: 'any',
           },
           {
             src: 'icons/icon-maskable.svg',
@@ -47,10 +49,10 @@ export default defineConfig(({ mode }) => ({
         ],
         runtimeCaching: [
           {
-            urlPattern: /\/api\/tasks/,
+            urlPattern: /\/api\/events/,
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'task-data',
+              cacheName: 'event-data',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 // 24 hours
@@ -63,10 +65,28 @@ export default defineConfig(({ mode }) => ({
                 statuses: [0, 200]
               },
               broadcastUpdate: {
-                channelName: 'task-updates',
+                channelName: 'event-updates',
                 options: {
                   headersToCheck: ['content-type', 'content-length', 'etag']
                 }
+              }
+            }
+          },
+          {
+            urlPattern: /\/api\/auth\/me/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'auth-data',
+              expiration: {
+                maxEntries: 1,
+                maxAgeSeconds: 60 * 5 // 5 minutes
+              },
+              networkTimeoutSeconds: 3,
+              fetchOptions: {
+                credentials: 'same-origin'
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
               }
             }
           },
@@ -87,10 +107,10 @@ export default defineConfig(({ mode }) => ({
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
-            urlPattern: /\/api\/tasks/,
+            urlPattern: /\/api\/events/,
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'task-data',
+              cacheName: 'event-data',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 // 24 hours

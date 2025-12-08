@@ -3,16 +3,46 @@ import { usePWAInstall } from '../hooks/usePWAInstall.js';
 const InstallPrompt = () => {
   const { isInstallable, promptInstall, isInstalled } = usePWAInstall();
 
+  const handleClick = async () => {
+    await promptInstall();
+  };
+
+  if (isInstalled) {
+    return (
+      <button
+        type="button"
+        className="btn btn--outline"
+        disabled
+        style={{ opacity: 0.65, cursor: 'not-allowed' }}
+        title="App already installed"
+      >
+        App Installed
+      </button>
+    );
+  }
+
+  if (!isInstallable) {
+    return (
+      <button
+        type="button"
+        className="btn btn--outline"
+        disabled
+        style={{ opacity: 0.65, cursor: 'not-allowed' }}
+        title="If you just uninstalled the app, try: 1) Clear browser cache 2) Unregister service workers in DevTools 3) Wait a few minutes 4) Hard refresh (Ctrl+Shift+R)"
+      >
+        Install App (Not Available)
+      </button>
+    );
+  }
+
   return (
     <button
       type="button"
       className="btn btn--outline"
-      onClick={promptInstall}
-      disabled={isInstalled || !isInstallable}
-      style={{ opacity: isInstalled || !isInstallable ? 0.65 : 1, cursor: isInstalled || !isInstallable ? 'not-allowed' : 'pointer' }}
-      title={isInstalled ? 'App already installed' : !isInstallable ? 'Install prompt becomes available when supported by your browser' : 'Install app'}
+      onClick={handleClick}
+      title="Install UniEvent as an app"
     >
-      Install app
+      Install App
     </button>
   );
 };

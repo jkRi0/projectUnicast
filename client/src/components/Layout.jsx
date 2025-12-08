@@ -3,6 +3,10 @@ import { useAuthContext } from '../context/AuthContext.jsx';
 
 const navLinks = [
   { to: '/', label: 'Home', private: false },
+  { to: '/events', label: 'Browse Events', private: false },
+  { to: '/my-events', label: 'My Events', private: true },
+  { to: '/my-rsvps', label: 'My RSVPs', private: true },
+  { to: '/analytics', label: 'Analytics', private: true },
 ];
 
 const Layout = ({ children }) => {
@@ -14,11 +18,11 @@ const Layout = ({ children }) => {
         <div className="layout__branding">
           <Link to="/" className="layout__logo">
             <span className="layout__logo-mark" aria-hidden="true">
-              App
+              Uni
             </span>
-            Name
+            Event
           </Link>
-          <p className="layout__tagline">Your platform</p>
+          <p className="layout__tagline">Personalized Event Planning</p>
         </div>
         <nav className="layout__nav">
           {navLinks.map((link) => {
@@ -53,7 +57,7 @@ const Layout = ({ children }) => {
       </header>
       <main className="layout__main">{children}</main>
       <footer className="layout__footer">
-        <p>&copy; {new Date().getFullYear()} App Name. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} UniEvent. Personalized event management.</p>
       </footer>
     </div>
   );

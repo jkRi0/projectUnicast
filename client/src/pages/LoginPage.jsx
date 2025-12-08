@@ -45,7 +45,7 @@ const LoginPage = () => {
   return (
     <div className="container">
       <form className="form-card" onSubmit={handleSubmit}>
-        <h1>Welcome back</h1>
+        <h1>Welcome to UniEvent</h1>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input

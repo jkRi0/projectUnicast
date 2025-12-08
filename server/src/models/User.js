@@ -31,6 +31,25 @@ const userSchema = new mongoose.Schema(
       default: 'local',
     },
     avatarUrl: String,
+    phone: {
+      type: String,
+      trim: true,
+    },
+    role: {
+      type: String,
+      enum: ['admin', 'teacher', 'student', 'parent', 'user'],
+      default: 'user',
+    },
+    preferences: {
+      emailNotifications: {
+        type: Boolean,
+        default: true,
+      },
+      smsNotifications: {
+        type: Boolean,
+        default: false,
+      },
+    },
   },
   {
     timestamps: true,

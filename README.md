@@ -1,5 +1,5 @@
-# projectUnicast
-system project for finals
+# UniEvent - UNICAST Event Planning System
+Personalized event management system for finals project
 
 UNICAST
 -Unicast means sending messages to one person at a time, rather than broadcasting to everyone 

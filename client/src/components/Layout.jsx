@@ -3,9 +3,6 @@ import { useAuthContext } from '../context/AuthContext.jsx';
 
 const navLinks = [
   { to: '/', label: 'Home', private: false },
-  { to: '/dashboard', label: 'Dashboard', private: true },
-  { to: '/schedule', label: 'Training Sessions', private: true },
-  { to: '/about', label: 'About Us', private: false },
 ];
 
 const Layout = ({ children }) => {
@@ -17,11 +14,11 @@ const Layout = ({ children }) => {
         <div className="layout__branding">
           <Link to="/" className="layout__logo">
             <span className="layout__logo-mark" aria-hidden="true">
-              TROPA
+              App
             </span>
-            SportsHQ
+            Name
           </Link>
-          <p className="layout__tagline">Manage your training tasks efficiently</p>
+          <p className="layout__tagline">Your platform</p>
         </div>
         <nav className="layout__nav">
           {navLinks.map((link) => {
@@ -48,20 +45,15 @@ const Layout = ({ children }) => {
               </button>
             </>
           ) : (
-            <>
-              <Link to="/login" className="btn btn--ghost">
-                Log in
-              </Link>
-              <Link to="/register" className="btn">
-                Sign up
-              </Link>
-            </>
+            <Link to="/login" className="btn btn--ghost">
+              Log in
+            </Link>
           )}
         </div>
       </header>
       <main className="layout__main">{children}</main>
       <footer className="layout__footer">
-        <p>&copy; {new Date().getFullYear()} TROPA. Stay ahead of the competition.</p>
+        <p>&copy; {new Date().getFullYear()} App Name. All rights reserved.</p>
       </footer>
     </div>
   );

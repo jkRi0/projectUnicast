@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext.jsx';
 
 const LoginPage = () => {
@@ -34,7 +34,7 @@ const LoginPage = () => {
     setSubmitting(false);
 
     if (result.success) {
-      const from = location.state?.from?.pathname || '/dashboard';
+      const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
     }
   };
@@ -45,7 +45,7 @@ const LoginPage = () => {
   return (
     <div className="container">
       <form className="form-card" onSubmit={handleSubmit}>
-        <h1>Welcome back, coach</h1>
+        <h1>Welcome back</h1>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
@@ -83,9 +83,6 @@ const LoginPage = () => {
           </a>
         </div>
 
-        <p>
-          Don&apos;t have an account? <Link to="/register">Register here</Link>
-        </p>
       </form>
     </div>
   );

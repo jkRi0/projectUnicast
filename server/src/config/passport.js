@@ -40,12 +40,27 @@ const configurePassport = () => {
         },
         async (accessToken, refreshToken, profile, done) => {
           try {
+            const email = profile.emails?.[0]?.value;
+            
+            // Check if email validation is enabled and validate email
+            const allowedEmails = process.env.ALLOWED_GOOGLE_EMAILS;
+            if (allowedEmails) {
+              const allowedList = allowedEmails
+                .split(',')
+                .map((e) => e.trim().toLowerCase())
+                .filter(Boolean);
+              
+              if (!email || !allowedList.includes(email.toLowerCase())) {
+                return done(null, false, { 
+                  message: 'This Google account is not authorized to access this application.' 
+                });
+              }
+            }
+
             const existingUser = await User.findOne({ googleId: profile.id });
             if (existingUser) {
               return done(null, existingUser);
             }
-
-            const email = profile.emails?.[0]?.value;
 
             const newUser = await User.create({
               username: email || profile.displayName,

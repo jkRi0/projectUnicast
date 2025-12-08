@@ -11,7 +11,16 @@ const LoginPage = () => {
 
   useEffect(() => {
     setAuthError(null);
-  }, [setAuthError]);
+    
+    // Check for OAuth errors in URL query params
+    const params = new URLSearchParams(location.search);
+    const error = params.get('error');
+    if (error === 'unauthorized') {
+      setAuthError('This Google account is not authorized to access this application.');
+    } else if (error === 'oauth' || error === 'no-oauth') {
+      setAuthError('Google authentication failed. Please try again.');
+    }
+  }, [setAuthError, location.search]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

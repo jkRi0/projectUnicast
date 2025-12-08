@@ -16,6 +16,10 @@ BCRYPT_SALT_ROUNDS=10
 CLIENT_ORIGIN=http://localhost:5173
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
+ALLOWED_GOOGLE_EMAILS=user1@example.com,user2@example.com
+```
+
+**Note:** `ALLOWED_GOOGLE_EMAILS` is optional. If set, only Google accounts with emails in this comma-separated list will be allowed to authenticate. If not set, any Google account can authenticate.
 ```
 
 ## Scripts

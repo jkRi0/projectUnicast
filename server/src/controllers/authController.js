@@ -108,12 +108,16 @@ export const googleCallback = (req, res, next) => {
     return res.redirect(`${clientBase}/login?error=no-oauth`);
   }
 
-  passport.authenticate('google', (err, user) => {
+  passport.authenticate('google', (err, user, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
-      return res.redirect(`${clientBase}/login?error=oauth`);
+      // Check if it's an authorization error (email not allowed)
+      const errorParam = info?.message?.includes('not authorized') 
+        ? 'unauthorized' 
+        : 'oauth';
+      return res.redirect(`${clientBase}/login?error=${errorParam}`);
     }
 
     req.login(user, (loginErr) => {
